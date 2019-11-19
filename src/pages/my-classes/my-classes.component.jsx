@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
 import Title from '../../components/title/title.component';
+import ClassList from '../../components/class-list/class-list.component';
 
 class MyClassesPage extends React.Component {
   static navigationOptions = () => ({
@@ -10,7 +10,7 @@ class MyClassesPage extends React.Component {
 
   render() {
     return (
-      <View />
+      <ClassList />
     );
   }
 }
