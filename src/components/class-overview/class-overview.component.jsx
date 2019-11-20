@@ -1,20 +1,29 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableHighlight } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import {
-  ClassNameStyled, ClassDescriptionStyled, StudentsLabelStyled, AmountStudentsStyled,
+  ContainerStyled,
+  ClassContainerStyled,
+  AmountStudentsContainerStyled,
+  ClassNameStyled,
+  ClassDescriptionStyled,
+  StudentsLabelStyled,
+  AmountStudentsStyled,
 } from './class-overview.styles';
 
-const ClassOverview = () => (
-  <View>
-    <View>
-      <ClassNameStyled>CDV</ClassNameStyled>
-      <ClassDescriptionStyled>Sábado - 2° sem / 2019</ClassDescriptionStyled>
-    </View>
-    <View>
-      <AmountStudentsStyled>05</AmountStudentsStyled>
-      <StudentsLabelStyled>ALUNOS</StudentsLabelStyled>
-    </View>
-  </View>
+const ClassOverview = ({ navigation }) => (
+  <TouchableHighlight onPress={() => navigation.push('AttendanceList')}>
+    <ContainerStyled>
+      <ClassContainerStyled>
+        <ClassNameStyled>CDV</ClassNameStyled>
+        <ClassDescriptionStyled>Sábado - 2° sem / 2019</ClassDescriptionStyled>
+      </ClassContainerStyled>
+      <AmountStudentsContainerStyled>
+        <AmountStudentsStyled>05</AmountStudentsStyled>
+        <StudentsLabelStyled>ALUNOS</StudentsLabelStyled>
+      </AmountStudentsContainerStyled>
+    </ContainerStyled>
+  </TouchableHighlight>
 );
 
-export default ClassOverview;
+export default withNavigation(ClassOverview);

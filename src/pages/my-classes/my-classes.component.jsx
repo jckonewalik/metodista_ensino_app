@@ -1,6 +1,7 @@
 import React from 'react';
 import Title from '../../components/title/title.component';
 import ClassList from '../../components/class-list/class-list.component';
+import { ContainerStyled } from './my-classes.styles';
 
 class MyClassesPage extends React.Component {
   static navigationOptions = () => ({
@@ -10,7 +11,9 @@ class MyClassesPage extends React.Component {
 
   render() {
     return (
-      <ClassList />
+      <ContainerStyled>
+        <ClassList />
+      </ContainerStyled>
     );
   }
 }

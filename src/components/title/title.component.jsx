@@ -1,11 +1,11 @@
 import React from 'react';
-import { ViewStyled, TitleStyled, SubTitleStyled } from './title.styles';
+import { ContainerStyled, TitleStyled, SubTitleStyled } from './title.styles';
 
 const Title = ({ title, subtitle }) => (
-  <ViewStyled>
+  <ContainerStyled>
     <TitleStyled>{title}</TitleStyled>
     <SubTitleStyled>{subtitle}</SubTitleStyled>
-  </ViewStyled>
+  </ContainerStyled>
 );
 
 export default Title;

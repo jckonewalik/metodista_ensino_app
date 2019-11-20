@@ -5,9 +5,8 @@ const font = css`
   color: #fff;
 `;
 
-export const ViewStyled = styled.View`
-  margin-left: 10px;
-  margin-bottom: 10px;
+export const ContainerStyled = styled.View`
+  margin: 10px 10px 10px 0;
 `;
 
 export const TitleStyled = styled.Text`
