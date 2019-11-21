@@ -1,21 +1,20 @@
 import styled, { css } from 'styled-components/native';
+import CustomText from '../custom-text/custom-text.component';
 
 const font = css`
-  font-family: Roboto;
   color: #fff;
 `;
 
 export const ContainerStyled = styled.View`
-  margin: 10px 10px 10px 0;
 `;
 
-export const TitleStyled = styled.Text`
+export const TitleStyled = styled(CustomText)`
   ${font}
   font-size: 20;
   font-weight: 700;
 `;
 
-export const SubTitleStyled = styled.Text`
+export const SubTitleStyled = styled(CustomText)`
   ${font}
   font-size: 14;
   font-weight: 300;
