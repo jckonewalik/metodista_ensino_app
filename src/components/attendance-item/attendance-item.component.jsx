@@ -1,14 +1,18 @@
 import React from 'react';
-import CustonText from '../custom-text/custom-text.component';
-import { ContainerStyled, ConfirmImageStyled } from './attendance-item.styles';
+import {
+  ContainerStyled, ButtonContainerStyled, NamedStyled,
+} from './attendance-item.styles';
+import CustomTouchableIcon from '../custom-touchable-icon/custom-touchable-icon.component';
 import confirm from '../../assets/confirm.png';
 import cancel from '../../assets/cancel.png';
 
 const AttendanceItem = () => (
   <ContainerStyled>
-    <CustonText>Attendance Item</CustonText>
-    <ConfirmImageStyled source={cancel} />
-    <ConfirmImageStyled source={confirm} />
+    <NamedStyled>Aline dos Santos</NamedStyled>
+    <ButtonContainerStyled>
+      <CustomTouchableIcon sourceImage={cancel} />
+      <CustomTouchableIcon sourceImage={confirm} />
+    </ButtonContainerStyled>
   </ContainerStyled>
 );
 

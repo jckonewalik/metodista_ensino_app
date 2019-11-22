@@ -3,6 +3,8 @@ import AttendanceOverview from '../../components/attendance-overview/attendance-
 import Title from '../../components/title/title.component';
 import RootContainer from '../../components/root-container/root-container.component';
 import AttendanceList from '../../components/attendance-list/attendance-list.component';
+import { ButtonContainerStyled, CustomButtonStyled } from './attendance.styles';
+
 
 class AttendancePage extends React.Component {
   static navigationOptions = () => ({
@@ -10,10 +12,16 @@ class AttendancePage extends React.Component {
   });
 
   render() {
+    const { navigation } = this.props;
     return (
       <RootContainer>
         <AttendanceOverview />
         <AttendanceList />
+        <ButtonContainerStyled>
+          <CustomButtonStyled onPress={() => navigation.push('AttendanceComplement')}>
+            SALVAR
+          </CustomButtonStyled>
+        </ButtonContainerStyled>
       </RootContainer>
     );
   }
