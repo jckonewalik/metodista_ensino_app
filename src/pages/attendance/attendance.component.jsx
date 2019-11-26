@@ -6,25 +6,20 @@ import AttendanceList from '../../components/attendance-list/attendance-list.com
 import { ButtonContainerStyled, CustomButtonStyled } from './attendance.styles';
 
 
-class AttendancePage extends React.Component {
-  static navigationOptions = () => ({
-    headerTitle: () => <Title title="Lista de Presença" subtitle="Fundamentos da Fé - 2° sem / 2019" />,
-  });
+const AttendancePage = ({ navigation }) => (
+  <RootContainer>
+    <AttendanceOverview />
+    <AttendanceList />
+    <ButtonContainerStyled>
+      <CustomButtonStyled onPress={() => navigation.push('AttendanceComplement')}>
+        SALVAR
+      </CustomButtonStyled>
+    </ButtonContainerStyled>
+  </RootContainer>
+);
 
-  render() {
-    const { navigation } = this.props;
-    return (
-      <RootContainer>
-        <AttendanceOverview />
-        <AttendanceList />
-        <ButtonContainerStyled>
-          <CustomButtonStyled onPress={() => navigation.push('AttendanceComplement')}>
-            SALVAR
-          </CustomButtonStyled>
-        </ButtonContainerStyled>
-      </RootContainer>
-    );
-  }
-}
+AttendancePage.navigationOptions = () => ({
+  headerTitle: () => <Title title="Lista de Presença" subtitle="Fundamentos da Fé - 2° sem / 2019" />,
+});
 
 export default AttendancePage;

@@ -1,0 +1,44 @@
+{
+    "classes": [
+        {
+            "id": 1,
+            "name": "CDV",
+            "description": "Sábado - 2° sem / 2019",
+            "studentsAmount": 3
+        },
+        {
+            "id": 2,
+            "name": "Fundamentos da Fé",
+            "description": "Sábado - 2° sem / 2019",
+            "studentsAmount": 5
+        },
+        {
+            "id": 3,
+            "name": "Fundamentos da Fé",
+            "description": "Domingo - 2° sem / 2019",
+            "studentsAmount": 20
+        }        
+    ],
+    "students": [
+        {
+            "id": 1,
+            "name": "José Carlos"
+        },
+        {
+            "id": 2,
+            "name": "Elizabeth"
+        },
+        {
+            "id": 3,
+            "name": "Amanda"
+        },
+        {
+            "id": 4,
+            "name": "Vinicio"
+        },
+        {
+            "id": 5,
+            "name": "Keiko"
+        }
+    ]
+}
