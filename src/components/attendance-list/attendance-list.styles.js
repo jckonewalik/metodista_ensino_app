@@ -18,7 +18,6 @@ export const HeaderAttendanceStyled = styled.View`
   background: #F22333;
 
 `;
-
 export const SelectedDateStyled = styled(CustomText)`
   margin: 0 30px;
   font-size: 20;

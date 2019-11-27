@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { FlatList, TouchableOpacity, Platform } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   ContainerStyled, HeaderAttendanceStyled, SelectedDateStyled,
 } from './attendance-list.styles';
@@ -15,6 +16,12 @@ const DATA = [
 
 const AttendanceList = () => {
   const [date, setDate] = useState(new Date());
+  const [mode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    console.log(date);
+  }, [date]);
 
   const addDays = (days) => {
     const newDate = new Date(date);
@@ -28,17 +35,32 @@ const AttendanceList = () => {
     setDate(newDate);
   };
 
-  const getFormattedDate = (dateToFormat) => `${dateToFormat.getDate()}/${dateToFormat.getMonth() + 1}/${dateToFormat.getFullYear()}`;
+  const selectDate = (event, newdate) => {
+    setDate(new Date(newdate));
+    setShow(Platform.OS === 'ios');
+  };
 
   return (
     <ContainerStyled>
       <HeaderAttendanceStyled>
         <CustomTouchableIcon onPress={() => addMonths(-1)} sourceImage={back} />
         <CustomTouchableIcon onPress={() => addDays(-1)} sourceImage={arrowLeft} />
-        <SelectedDateStyled>{getFormattedDate(date)}</SelectedDateStyled>
+        <TouchableOpacity onPress={() => setShow(!show)}>
+          <SelectedDateStyled>{`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}</SelectedDateStyled>
+        </TouchableOpacity>
         <CustomTouchableIcon onPress={() => addDays(1)} sourceImage={arrowRight} />
         <CustomTouchableIcon onPress={() => addMonths(1)} sourceImage={next} />
       </HeaderAttendanceStyled>
+      { show && (
+        <DateTimePicker
+          value={date}
+          mode={mode}
+          locale="pt_BR"
+          is24Hour
+          display="default"
+          onChange={selectDate}
+        />
+      )}
       <FlatList
         data={DATA}
         renderItem={({ item }) => <AttendanceItem student={item} />}

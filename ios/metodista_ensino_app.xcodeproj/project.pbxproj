@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* metodista_ensino_appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* metodista_ensino_appTests.m */; };
 		0E7429F2C270A409431E2D19 /* libPods-metodista_ensino_app-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0160ED5016EE8A0C9553D5A2 /* libPods-metodista_ensino_app-tvOS.a */; };

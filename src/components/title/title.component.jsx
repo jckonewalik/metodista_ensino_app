@@ -8,7 +8,11 @@ const Title = ({ title, subtitle }) => (
         ? title.substring(0, 25).concat('...')
         : title}
     </TitleStyled>
-    <SubTitleStyled>{subtitle}</SubTitleStyled>
+    <SubTitleStyled>
+      {subtitle.length > 30
+        ? subtitle.substring(0, 30).concat('...')
+        : subtitle}
+    </SubTitleStyled>
   </ContainerStyled>
 );
 

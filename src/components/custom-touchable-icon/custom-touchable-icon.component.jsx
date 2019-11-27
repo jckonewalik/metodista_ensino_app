@@ -4,7 +4,11 @@ import { ImageStyled } from './custom-touchable-icon.styles';
 
 const CustomTouchableIcon = ({ sourceImage, ...otherProps }) => (
   <TouchableOpacity {...otherProps}>
-    <ImageStyled source={sourceImage} />
+    {
+    sourceImage
+      ? <ImageStyled source={sourceImage} />
+      : null
+    }
   </TouchableOpacity>
 );
 
