@@ -6,9 +6,9 @@ import CustomTouchableIcon from '../custom-touchable-icon/custom-touchable-icon.
 import confirm from '../../assets/confirm.png';
 import cancel from '../../assets/cancel.png';
 
-const AttendanceItem = () => (
+const AttendanceItem = ({ student }) => (
   <ContainerStyled>
-    <NamedStyled>Aline dos Santos</NamedStyled>
+    <NamedStyled>{student.name}</NamedStyled>
     <ButtonContainerStyled>
       <CustomTouchableIcon sourceImage={cancel} />
       <CustomTouchableIcon sourceImage={confirm} />

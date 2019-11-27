@@ -1,6 +1,5 @@
 import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import {
@@ -12,11 +11,15 @@ import {
 import Amount from '../amount/amount.component';
 import { setCurrentClass } from '../../redux/class/class.actions';
 
-const ClassOverview = ({ classItem, navigation, setCurrentClass }) => {
+
+const ClassOverview = ({ classItem, navigation }) => {
+  const dispatch = useDispatch();
+
   const handleClick = async () => {
-    await setCurrentClass(classItem);
-    navigation.push('Attendance');
+    await dispatch(setCurrentClass(classItem));
+    navigation.push('Attendance', { currentClass: classItem });
   };
+
   return (
     <TouchableOpacity onPress={handleClick}>
       <ContainerStyled>
@@ -30,11 +33,4 @@ const ClassOverview = ({ classItem, navigation, setCurrentClass }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentClass: (currentClass) => dispatch(setCurrentClass(currentClass)),
-});
-
-export default compose(
-  connect(null, mapDispatchToProps),
-  withNavigation,
-)(ClassOverview);
+export default withNavigation(ClassOverview);

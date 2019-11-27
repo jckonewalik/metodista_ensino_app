@@ -5,7 +5,7 @@ export const ContainerStyled = styled.View`
 `;
 
 export const ButtonStyled = styled.TouchableOpacity`
-  background: #F55E5E;
+  background: #F22333;
   align-items: center;
   border-radius: 30;
   padding: 5px 0;

@@ -5,7 +5,6 @@ import RootContainer from '../../components/root-container/root-container.compon
 import AttendanceList from '../../components/attendance-list/attendance-list.component';
 import { ButtonContainerStyled, CustomButtonStyled } from './attendance.styles';
 
-
 const AttendancePage = ({ navigation }) => (
   <RootContainer>
     <AttendanceOverview />
@@ -18,8 +17,11 @@ const AttendancePage = ({ navigation }) => (
   </RootContainer>
 );
 
-AttendancePage.navigationOptions = () => ({
-  headerTitle: () => <Title title="Lista de Presença" subtitle="Fundamentos da Fé - 2° sem / 2019" />,
-});
+AttendancePage.navigationOptions = ({ navigation }) => {
+  const currentClass = navigation.getParam('currentClass');
+  return ({
+    headerTitle: () => <Title title="Lista de Presença" subtitle={currentClass ? `${currentClass.name} - ${currentClass.description}` : ''} />,
+  });
+};
 
 export default AttendancePage;

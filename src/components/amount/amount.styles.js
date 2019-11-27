@@ -6,7 +6,7 @@ export const ContainerStyled = styled.View`
 `;
 
 export const AmountStyled = styled(CustomText)`
-  color: #F55E5E;
+  color: #F22333;
   font-weight: 700;
   font-size: 30;
 `;

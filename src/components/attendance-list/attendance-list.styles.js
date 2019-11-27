@@ -15,7 +15,7 @@ export const HeaderAttendanceStyled = styled.View`
   flex-direction: row;
   justify-content: space-between;
   min-height: 50px;
-  background: #F55E5E;
+  background: #F22333;
 
 `;
 

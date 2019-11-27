@@ -7,7 +7,7 @@ import Routes from './routes';
 
 const App = () => (
   <Provider store={store}>
-    <StatusBar barStyle="light-content" backgroundColor="#F55E5E" />
+    <StatusBar barStyle="light-content" backgroundColor="#F22333" />
     <Routes />
   </Provider>
 );

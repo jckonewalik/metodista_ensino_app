@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList } from 'react-native';
 import {
   ContainerStyled, HeaderAttendanceStyled, SelectedDateStyled,
@@ -11,51 +11,41 @@ import back from '../../assets/back.png';
 import next from '../../assets/next.png';
 
 const DATA = [
-  {
-    id: '1',
-    title: 'First Item',
-  },
-  {
-    id: '2',
-    title: 'Second Item',
-  },
-  {
-    id: '3',
-    title: 'Third Item',
-  },
-  {
-    id: '4',
-    title: 'Third Item',
-  },
-  {
-    id: '5',
-    title: 'Third Item',
-  },
-  {
-    id: '6',
-    title: 'Third Item',
-  },
-  {
-    id: '7',
-    title: 'Third Item',
-  },
 ];
 
-const AttendanceList = () => (
-  <ContainerStyled>
-    <HeaderAttendanceStyled>
-      <CustomTouchableIcon sourceImage={back} />
-      <CustomTouchableIcon sourceImage={arrowLeft} />
-      <SelectedDateStyled>22/11/2019</SelectedDateStyled>
-      <CustomTouchableIcon sourceImage={arrowRight} />
-      <CustomTouchableIcon sourceImage={next} />
-    </HeaderAttendanceStyled>
-    <FlatList
-      data={DATA}
-      renderItem={() => <AttendanceItem />}
-      keyExtractor={(item) => item.id}
-    />
-  </ContainerStyled>
-);
+const AttendanceList = () => {
+  const [date, setDate] = useState(new Date());
+
+  const addDays = (days) => {
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + days);
+    setDate(newDate);
+  };
+
+  const addMonths = (days) => {
+    const newDate = new Date(date);
+    newDate.setMonth(newDate.getMonth() + days);
+    setDate(newDate);
+  };
+
+  const getFormattedDate = (dateToFormat) => `${dateToFormat.getDate()}/${dateToFormat.getMonth() + 1}/${dateToFormat.getFullYear()}`;
+
+  return (
+    <ContainerStyled>
+      <HeaderAttendanceStyled>
+        <CustomTouchableIcon onPress={() => addMonths(-1)} sourceImage={back} />
+        <CustomTouchableIcon onPress={() => addDays(-1)} sourceImage={arrowLeft} />
+        <SelectedDateStyled>{getFormattedDate(date)}</SelectedDateStyled>
+        <CustomTouchableIcon onPress={() => addDays(1)} sourceImage={arrowRight} />
+        <CustomTouchableIcon onPress={() => addMonths(1)} sourceImage={next} />
+      </HeaderAttendanceStyled>
+      <FlatList
+        data={DATA}
+        renderItem={({ item }) => <AttendanceItem student={item} />}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </ContainerStyled>
+  );
+};
 
 export default AttendanceList;
