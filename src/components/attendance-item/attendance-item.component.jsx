@@ -8,7 +8,7 @@ import cancel from '../../assets/cancel.png';
 
 const AttendanceItem = ({ student }) => (
   <ContainerStyled>
-    <NamedStyled>{student.name}</NamedStyled>
+    <NamedStyled>{`${student.firstName} ${student.lastName}`}</NamedStyled>
     <ButtonContainerStyled>
       <CustomTouchableIcon sourceImage={cancel} />
       <CustomTouchableIcon sourceImage={confirm} />

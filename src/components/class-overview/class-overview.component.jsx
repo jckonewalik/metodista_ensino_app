@@ -10,6 +10,26 @@ import {
 } from './class-overview.styles';
 import Amount from '../amount/amount.component';
 import { setCurrentClass } from '../../redux/class/class.actions';
+import { setAttendanceStudents } from '../../redux/attendance/attendance.actions';
+
+const DATA = [{
+  student: {
+    id: 1,
+    firstName: 'João Carlos',
+    middleName: 'Konewalik',
+    lastName: 'de Souza',
+  },
+  status: null,
+},
+{
+  student: {
+    id: 2,
+    firstName: 'Alana Lucia',
+    middleName: 'Guerra',
+    lastName: 'de Souza',
+  },
+  status: null,
+}];
 
 
 const ClassOverview = ({ classItem, navigation }) => {
@@ -17,6 +37,7 @@ const ClassOverview = ({ classItem, navigation }) => {
 
   const handleClick = async () => {
     await dispatch(setCurrentClass(classItem));
+    await dispatch(setAttendanceStudents(DATA));
     navigation.push('Attendance', { currentClass: classItem });
   };
 
