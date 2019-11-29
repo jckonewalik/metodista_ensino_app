@@ -2,22 +2,38 @@ import { createSelector } from 'reselect';
 
 const selectAttendance = (state) => state.attendance;
 
-export const selectAttendanceStudents = createSelector(
+export const selectAttendanceAppointments = createSelector(
   [selectAttendance],
-  (attendance) => attendance.students,
+  (attendance) => attendance.appointments,
+);
+
+export const selectAttendanceDate = createSelector(
+  [selectAttendance],
+  (attendance) => attendance.date,
 );
 
 export const selectStudentsRemaining = createSelector(
-  [selectAttendanceStudents],
-  (students) => students.reduce((acc, student) => (acc + student.status ? 0 : 1), 0),
+  [selectAttendanceAppointments],
+  (appointments) => appointments.reduce(
+    (acc, appointment) => acc + (appointment.status === null ? 1 : 0), 0,
+  ),
 );
 
 export const selectStudentsPresents = createSelector(
-  [selectAttendanceStudents],
-  (students) => students.reduce((acc, student) => (acc + student.status === true ? 1 : 0), 0),
+  [selectAttendanceAppointments],
+  (appointments) => appointments.reduce(
+    (acc, appointment) => acc + (appointment.status === true && 1), 0,
+  ),
 );
 
 export const selectStudentsMissing = createSelector(
-  [selectAttendanceStudents],
-  (students) => students.reduce((acc, student) => (acc + student.status === false ? 1 : 0), 0),
+  [selectAttendanceAppointments],
+  (appointments) => appointments.reduce(
+    (acc, appointment) => acc + (appointment.status === false && 1), 0,
+  ),
+);
+
+export const selectAttendancesComplete = createSelector(
+  [selectStudentsRemaining],
+  (remaining) => remaining === 0,
 );

@@ -1,14 +1,25 @@
 import AttendanceTypes from './attendance.types';
+import { setAppointment } from './attendance.utils';
 
 const INITIAL_STATE = {
-  date: null,
-  students: [],
+  date: new Date(),
+  appointments: [],
 };
 
 const attendanceReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case AttendanceTypes.SET_ATTENDANCE_STUDENTS:
-      return { ...state, students: action.payload };
+    case AttendanceTypes.SET_ATTENDANCE_APPOINTMENTS:
+      return { ...state, appointments: action.payload };
+    case AttendanceTypes.SET_APPOINTMENT:
+      return {
+        ...state,
+        appointments: setAppointment(state.appointments, action.payload),
+      };
+    case AttendanceTypes.SET_ATTENDANCE_DATE:
+      return {
+        ...state,
+        date: action.payload,
+      };
     default:
       return state;
   }

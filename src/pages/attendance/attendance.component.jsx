@@ -1,66 +1,43 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, Platform } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AttendanceOverview from '../../components/attendance-overview/attendance-overview.component';
 import Title from '../../components/title/title.component';
 import RootContainer from '../../components/root-container/root-container.component';
 import AttendanceList from '../../components/attendance-list/attendance-list.component';
+import DatePickerBarComponent from '../../components/date-picker-bar/date-picker-bar.component';
+import { setAttendanceDate } from '../../redux/attendance/attendance.actions';
+import { selectAttendanceDate, selectAttendancesComplete } from '../../redux/attendance/attendance.selectors';
 import {
-  ButtonContainerStyled, CustomButtonStyled, HeaderAttendanceStyled, SelectedDateStyled,
+  ButtonContainerStyled,
+  CustomButtonStyled,
+  AttendanceListContainerStyled,
 } from './attendance.styles';
-import CustomTouchableIcon from '../../components/custom-touchable-icon/custom-touchable-icon.component';
-import arrowLeft from '../../assets/arrow-left.png';
-import arrowRight from '../../assets/arrow-right.png';
-import back from '../../assets/back.png';
-import next from '../../assets/next.png';
 
 const AttendancePage = ({ navigation }) => {
-  const [date, setDate] = useState(new Date());
-  const [mode] = useState('date');
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  const attendanceDate = useSelector(selectAttendanceDate);
+  const attendancesComplete = useSelector(selectAttendancesComplete);
 
-  const addDays = (days) => {
-    const newDate = new Date(date);
-    newDate.setDate(newDate.getDate() + days);
-    setDate(newDate);
+  const selectDate = (newdate) => {
+    dispatch(setAttendanceDate(newdate));
   };
 
-  const addMonths = (days) => {
-    const newDate = new Date(date);
-    newDate.setMonth(newDate.getMonth() + days);
-    setDate(newDate);
-  };
-
-  const selectDate = (event, newdate) => {
-    setShow(Platform.OS === 'ios');
-    setDate(newdate || date);
-  };
   return (
-
     <RootContainer>
       <AttendanceOverview />
-      <HeaderAttendanceStyled>
-        <CustomTouchableIcon onPress={() => addMonths(-1)} sourceImage={back} />
-        <CustomTouchableIcon onPress={() => addDays(-1)} sourceImage={arrowLeft} />
-        <TouchableOpacity onPress={() => setShow(!show)}>
-          <SelectedDateStyled>{`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}</SelectedDateStyled>
-        </TouchableOpacity>
-        <CustomTouchableIcon onPress={() => addDays(1)} sourceImage={arrowRight} />
-        <CustomTouchableIcon onPress={() => addMonths(1)} sourceImage={next} />
-      </HeaderAttendanceStyled>
-      { show && (
-      <DateTimePicker
-        value={date}
-        mode={mode}
-        locale="pt_BR"
-        is24Hour
-        display="default"
-        onChange={selectDate}
-      />
-      )}
-      <AttendanceList />
+      <AttendanceListContainerStyled>
+        <DatePickerBarComponent
+          date={attendanceDate}
+          handleChange={selectDate}
+        />
+        <AttendanceList />
+      </AttendanceListContainerStyled>
       <ButtonContainerStyled>
-        <CustomButtonStyled onPress={() => navigation.push('AttendanceComplement')}>
+        <CustomButtonStyled
+          disabled={!attendancesComplete}
+          onPress={() => navigation.push('AttendanceComplement',
+            { currentClass: navigation.getParam('currentClass') })}
+        >
         SALVAR
         </CustomButtonStyled>
       </ButtonContainerStyled>

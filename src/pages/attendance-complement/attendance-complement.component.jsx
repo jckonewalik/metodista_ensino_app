@@ -22,8 +22,11 @@ const AttendanceComplementPage = () => (
   </RootContainerStyled>
 );
 
-AttendanceComplementPage.navigationOptions = () => ({
-  headerTitle: () => <Title title="Fundamentos da Fé - 2° sem / 2019" subtitle="22/11/2019" />,
-});
+AttendanceComplementPage.navigationOptions = ({ navigation }) => {
+  const currentClass = navigation.getParam('currentClass');
+  return ({
+    headerTitle: () => <Title title="Lista de Presença" subtitle={currentClass ? `${currentClass.name} - ${currentClass.description}` : ''} />,
+  });
+};
 
 export default AttendanceComplementPage;
