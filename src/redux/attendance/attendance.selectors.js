@@ -12,6 +12,16 @@ export const selectAttendanceDate = createSelector(
   (attendance) => attendance.date,
 );
 
+export const selectAttendanceTeacher = createSelector(
+  [selectAttendance],
+  (attendance) => attendance.teacher,
+);
+
+export const selectAttendanceLesson = createSelector(
+  [selectAttendance],
+  (attendance) => attendance.lesson,
+);
+
 export const selectStudentsRemaining = createSelector(
   [selectAttendanceAppointments],
   (appointments) => appointments.reduce(

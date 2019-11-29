@@ -4,6 +4,8 @@ import { setAppointment } from './attendance.utils';
 const INITIAL_STATE = {
   date: new Date(),
   appointments: [],
+  teacher: null,
+  lesson: null,
 };
 
 const attendanceReducer = (state = INITIAL_STATE, action) => {
@@ -19,6 +21,16 @@ const attendanceReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         date: action.payload,
+      };
+    case AttendanceTypes.SET_ATTENDANCE_TEACHER:
+      return {
+        ...state,
+        teacher: action.payload,
+      };
+    case AttendanceTypes.SET_ATTENDANCE_LESSON:
+      return {
+        ...state,
+        lesson: action.payload,
       };
     default:
       return state;

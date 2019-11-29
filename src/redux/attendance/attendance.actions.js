@@ -14,3 +14,13 @@ export const setAttendanceDate = (date) => ({
   type: AttendanceTypes.SET_ATTENDANCE_DATE,
   payload: date,
 });
+
+export const setAttendanceTeacher = (teacher) => ({
+  type: AttendanceTypes.SET_ATTENDANCE_TEACHER,
+  payload: teacher,
+});
+
+export const setAttendanceLesson = (lesson) => ({
+  type: AttendanceTypes.SET_ATTENDANCE_LESSON,
+  payload: lesson,
+});
