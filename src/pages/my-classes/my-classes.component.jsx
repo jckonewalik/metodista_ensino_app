@@ -7,16 +7,6 @@ import RootContainer from '../../components/root-container/root-container.compon
 
 const MyClassesPage = () => {
   const [classes] = useState(classList);
-
-  // useEffect(() => {
-  //   async function getClasses() {
-  //     const resp = await api.get('/classes');
-  //     setClasses(resp.data);
-  //   }
-
-  //   getClasses();
-  // }, []);
-
   return (
     <RootContainer>
       <ClassList classes={classes} />

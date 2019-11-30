@@ -7,7 +7,9 @@ export const RootContainerStyled = styled(RootContainer)`
   justify-content: space-between;
 `;
 
-export const BodyStyled = styled.View``;
+export const BodyStyled = styled.View`
+  margin-top: 50px;
+`;
 
 export const FooterStyled = styled.View`
   margin-bottom: 50px;
@@ -23,9 +25,5 @@ export const LabelStyled = styled(CustomText)`
   margin-left: 10px;
   font-size: 14;
   font-weight: 700;
-`;
-
-export const PickerStyled = styled.Picker`
-  font-family: Roboto;
-  font-weight: 300;
+  text-transform: uppercase;
 `;

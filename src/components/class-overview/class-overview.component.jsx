@@ -16,18 +16,27 @@ const DATA = [
   {
     student: {
       id: 1,
-      firstName: 'João Carlos',
-      middleName: 'Konewalik',
-      lastName: 'de Souza',
+      firstName: 'Aluno 1',
+      middleName: '',
+      lastName: '',
     },
     status: null,
   },
   {
     student: {
       id: 2,
-      firstName: 'Alana Lucia',
-      middleName: 'Guerra',
-      lastName: 'de Souza',
+      firstName: 'Aluno 2',
+      middleName: '',
+      lastName: '',
+    },
+    status: null,
+  },
+  {
+    student: {
+      id: 3,
+      firstName: 'Aluno 3',
+      middleName: '',
+      lastName: '',
     },
     status: null,
   }];

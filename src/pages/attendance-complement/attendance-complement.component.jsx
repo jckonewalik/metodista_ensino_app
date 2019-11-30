@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Picker } from 'react-native';
+import CustomPickerButton from '../../components/custom-picker-button/custom-picker-button.component';
 import Title from '../../components/title/title.component';
 
 import {
@@ -11,8 +11,6 @@ import {
   RootContainerStyled,
   BodyStyled,
   FooterStyled,
-  LabelStyled,
-  PickerStyled,
   SaveButtonStyled,
 } from './attendance-complement.styles';
 import {
@@ -56,44 +54,18 @@ const AttendanceComplementPage = () => {
   return (
     <RootContainerStyled>
       <BodyStyled>
-        <LabelStyled>Professor</LabelStyled>
-        <PickerStyled
-          selectedValue={attendanceTeacher}
-          onValueChange={(itemValue) => dispatch(setAttendanceTeacher(itemValue))}
-        >
-          <Picker.Item
-            label="Selecione"
-            value={null}
-          />
-          {
-          teachers.map((teacher) => (
-            <Picker.Item
-              key={teacher.id}
-              label={teacher.name}
-              value={teacher}
-            />
-          ))
-        }
-        </PickerStyled>
-        <LabelStyled>Lição</LabelStyled>
-        <Picker
-          selectedValue={attendanceLesson}
-          onValueChange={(itemValue) => dispatch(setAttendanceLesson(itemValue))}
-        >
-          <Picker.Item
-            label="Selecione"
-            value={null}
-          />
-          {
-          lessons.map((lesson) => (
-            <Picker.Item
-              key={lesson.id}
-              label={lesson.name}
-              value={lesson}
-            />
-          ))
-        }
-        </Picker>
+        <CustomPickerButton
+          label="Professor"
+          value={attendanceTeacher}
+          handleChange={(itemValue) => dispatch(setAttendanceTeacher(itemValue))}
+          options={teachers}
+        />
+        <CustomPickerButton
+          label="Lição"
+          value={attendanceLesson}
+          handleChange={(itemValue) => dispatch(setAttendanceLesson(itemValue))}
+          options={lessons}
+        />
       </BodyStyled>
       <FooterStyled>
         <SaveButtonStyled>SALVAR</SaveButtonStyled>
