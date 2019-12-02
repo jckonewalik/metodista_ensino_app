@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import CustomText from '../custom-text/custom-text.component';
 
 export const ContainerStyled = styled.View`
-  margin: 10px;
+  margin: 10px 0;
 `;
 
 export const ContentContainerStyled = styled.View`

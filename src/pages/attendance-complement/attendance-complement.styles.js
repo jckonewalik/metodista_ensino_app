@@ -4,6 +4,7 @@ import CustomButton from '../../components/custom-button/custom-button.component
 import CustomText from '../../components/custom-text/custom-text.component';
 
 export const RootContainerStyled = styled(RootContainer)`
+  flex: 1;
   justify-content: space-between;
 `;
 
@@ -12,12 +13,14 @@ export const BodyStyled = styled.View`
 `;
 
 export const FooterStyled = styled.View`
-  margin-bottom: 50px;
-  align-items: flex-end;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 15px;
 `;
 
 export const SaveButtonStyled = styled(CustomButton)`
   width: 120px;
+  height: 40px;
 `;
 
 export const LabelStyled = styled(CustomText)`

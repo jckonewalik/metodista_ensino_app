@@ -14,8 +14,9 @@ export const ContainerStyled = styled.View`
 export const ButtonStyled = styled.TouchableOpacity`
   ${getButtonColor}
   align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
   border-radius: 30;
-  padding: 5px 0;
 `;
 
 export const LabelStyled = styled(CustomText)`

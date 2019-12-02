@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
-import { Picker, Platform, TouchableWithoutFeedback } from 'react-native';
+import React from 'react';
+import { Picker, TouchableWithoutFeedback } from 'react-native';
 import {
   ContainerStyled, ContentContainerStyled, LabelStyled, ValueStyled,
 } from './custom-picker-button.styles';
 
 const CustomPickerButton = (props) => {
-  const [show, setShow] = useState(false);
   const {
-    label, value, options, handleChange,
+    label, value, options, handleChange, handlePress, show,
   } = props;
   const findById = (id) => options.filter((option) => option.id === id)[0];
   const onValueChange = (itemValue) => {
-    setShow(Platform.OS === 'ios');
     handleChange(itemValue);
   };
   return (
     <ContainerStyled>
-      <TouchableWithoutFeedback onPress={() => setShow(!show)}>
+      <TouchableWithoutFeedback onPress={() => handlePress(!show)}>
         <ContentContainerStyled>
           {
             value ? (
