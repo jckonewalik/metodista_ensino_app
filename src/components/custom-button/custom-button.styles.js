@@ -23,5 +23,4 @@ export const LabelStyled = styled(CustomText)`
   color: #FFF;
   font-size: 16;
   font-weight: 700;
-  text-transform: uppercase;
 `;
