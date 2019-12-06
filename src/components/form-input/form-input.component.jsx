@@ -5,9 +5,9 @@ import {
   FormInputIconLabelStyled,
 } from './form-input.styles';
 
-const FormInput = ({ icon, handleChange, ...otherProps }) => (
+const FormInput = ({ icon, ...otherProps }) => (
   <GroupContainer>
-    <FormInputStyled onChange={handleChange} {...otherProps} />
+    <FormInputStyled {...otherProps} />
     {icon ? (
       <FormInputIconLabelStyled source={icon} />
     ) : null}

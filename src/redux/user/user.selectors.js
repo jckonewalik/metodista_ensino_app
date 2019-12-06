@@ -6,3 +6,8 @@ export const currentUserSelector = createSelector(
   [userSelector],
   (user) => user.currentUser,
 );
+
+export const errorMessageSelector = createSelector(
+  [userSelector],
+  (user) => user.error,
+);
