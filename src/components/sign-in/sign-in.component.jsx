@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TouchableOpacity, Alert } from 'react-native';
+import { TouchableOpacity, Alert, YellowBox } from 'react-native';
+import { auth } from '../../firebase/firebase.utils';
 import { emailSignInStart } from '../../redux/user/user.actions';
 import FormInput from '../form-input/form-input.component';
-import CustomTouchableIcon from '../custom-touchable-icon/custom-touchable-icon.component';
 import {
   MainContainerStyled,
   ButtonsContainerStyled,
@@ -15,7 +15,6 @@ import {
 } from './sign-in.styles';
 import { errorMessageSelector } from '../../redux/user/user.selectors';
 import logo from '../../assets/metodista.png';
-import google from '../../assets/google.png';
 import email from '../../assets/email.png';
 import lock from '../../assets/lock.png';
 
@@ -40,10 +39,34 @@ const SignIn = () => {
     }
   };
 
+  useEffect(() => YellowBox.ignoreWarnings(['Setting a timer']), []);
   useEffect(() => showErrorMessage(), [errorMessage]);
 
   const handleSubmit = () => {
     dispatch(emailSignInStart(userCredentials));
+  };
+
+  const handlePasswordForgot = async () => {
+    try {
+      await auth.sendPasswordResetEmail(userCredentials.email);
+      Alert.alert(
+        '',
+        `Um email foi enviado para o endereço ${userCredentials.email}`,
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: false },
+      );
+    } catch (error) {
+      Alert.alert(
+        'Erro ao redefinir senha',
+        `${error.message}`,
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: false },
+      );
+    }
   };
 
   const handleEmailChange = (text) => {
@@ -75,11 +98,9 @@ const SignIn = () => {
       </InputContainerStyled>
       <ButtonsContainerStyled>
         <LoginButtonStyled onPress={handleSubmit}>Login</LoginButtonStyled>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlePasswordForgot}>
           <OptionStyled>Esqueceu sua senha?</OptionStyled>
         </TouchableOpacity>
-        <OptionStyled>Login com</OptionStyled>
-        <CustomTouchableIcon sourceImage={google} />
       </ButtonsContainerStyled>
     </MainContainerStyled>
   );
