@@ -6,3 +6,8 @@ export const selectCurrentClass = createSelector(
   [selectClass],
   (classes) => classes.currentClass,
 );
+
+export const selectIsLoadingClassess = createSelector(
+  [selectClass],
+  (classes) => classes.isLoading,
+);
