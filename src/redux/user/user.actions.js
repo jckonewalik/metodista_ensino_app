@@ -14,3 +14,7 @@ export const signInFailure = (error) => ({
   type: UserTypes.SIGN_IN_FAILURE,
   payload: error,
 });
+
+export const checkUserSession = () => ({
+  type: UserTypes.CHECK_USER_SESSION,
+});
