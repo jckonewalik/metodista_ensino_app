@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TouchableOpacity, Alert, YellowBox } from 'react-native';
-import { auth } from '../../firebase/firebase.utils';
 import { emailSignInStart } from '../../redux/user/user.actions';
 import FormInput from '../form-input/form-input.component';
 import {
@@ -47,26 +46,6 @@ const SignIn = () => {
   };
 
   const handlePasswordForgot = async () => {
-    try {
-      await auth.sendPasswordResetEmail(userCredentials.email);
-      Alert.alert(
-        '',
-        `Um email foi enviado para o endereço ${userCredentials.email}`,
-        [
-          { text: 'OK' },
-        ],
-        { cancelable: false },
-      );
-    } catch (error) {
-      Alert.alert(
-        'Erro ao redefinir senha',
-        `${error.message}`,
-        [
-          { text: 'OK' },
-        ],
-        { cancelable: false },
-      );
-    }
   };
 
   const handleEmailChange = (text) => {
