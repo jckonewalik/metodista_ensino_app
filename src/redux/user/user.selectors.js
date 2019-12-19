@@ -11,3 +11,8 @@ export const errorMessageSelector = createSelector(
   [userSelector],
   (user) => user.error,
 );
+
+export const userTokenSelector = createSelector(
+  [currentUserSelector],
+  (currentUser) => currentUser.token,
+);
