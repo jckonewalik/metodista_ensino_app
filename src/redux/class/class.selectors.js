@@ -7,11 +7,14 @@ export const selectCurrentClass = createSelector(
   (classes) => classes.currentClass,
 );
 
-export const selectIsLoadingClasses = createSelector(
+export const selectIsFechingClasses = createSelector(
   [selectClass],
-  (classes) => classes.isLoading,
+  (classes) => classes.isFechingClasses,
 );
-
+export const selectIsFechingCurrentClass = createSelector(
+  [selectClass],
+  (classes) => classes.isFechingCurrentClass,
+);
 export const selectMyClasses = createSelector(
   [selectClass],
   (classes) => classes.myClasses,

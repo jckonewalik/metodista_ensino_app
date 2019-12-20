@@ -2,26 +2,35 @@ import ClassActionsType from './class.types';
 
 const INITIAL_STATE = {
   currentClass: null,
+  errorMessage: '',
   myClasses: [],
-  isLoading: true,
+  isFechingCurrentClass: true,
+  isFechingClasses: true,
 };
 
 const classReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ClassActionsType.SET_CURRENT_CLASS:
-      return { ...state, currentClass: action.payload };
+    case ClassActionsType.SET_CURRENT_CLASS_START:
+      return { ...state, isFechingCurrentClass: true };
+    case ClassActionsType.SET_CURRENT_CLASS_SUCCESS:
+      return { ...state, isFechingCurrentClass: false, currentClass: action.payload };
+    case ClassActionsType.SET_CURRENT_CLASS_FAILURE:
+      return {
+        ...state, isFechingCurrentClass: false, currentClass: null, errorMessage: action.payload,
+      };
     case ClassActionsType.GET_CLASSES_START:
-      return { ...state, isLoading: true };
+      return { ...state, isFechingClasses: true };
     case ClassActionsType.GET_CLASSES_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isFechingClasses: false,
         myClasses: action.payload,
       };
     case ClassActionsType.GET_CLASSES_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isFechingClasses: false,
+        errorMessage: action.payload,
         myClasses: [],
       };
     default:

@@ -9,45 +9,44 @@ import {
   ClassDescriptionStyled,
 } from './class-overview.styles';
 import Amount from '../amount/amount.component';
-import { setCurrentClass } from '../../redux/class/class.actions';
-import { setAttendanceAppointments } from '../../redux/attendance/attendance.actions';
+import { setCurrentClassStart } from '../../redux/class/class.actions';
+// import { setAttendanceAppointments } from '../../redux/attendance/attendance.actions';
 
-const DATA = [
-  {
-    student: {
-      id: 1,
-      firstName: 'Aluno 1',
-      middleName: '',
-      lastName: '',
-    },
-    status: null,
-  },
-  {
-    student: {
-      id: 2,
-      firstName: 'Aluno 2',
-      middleName: '',
-      lastName: '',
-    },
-    status: null,
-  },
-  {
-    student: {
-      id: 3,
-      firstName: 'Aluno 3',
-      middleName: '',
-      lastName: '',
-    },
-    status: null,
-  }];
+// const DATA = [
+//   {
+//     student: {
+//       id: 1,
+//       firstName: 'Aluno 1',
+//       middleName: '',
+//       lastName: '',
+//     },
+//     status: null,
+//   },
+//   {
+//     student: {
+//       id: 2,
+//       firstName: 'Aluno 2',
+//       middleName: '',
+//       lastName: '',
+//     },
+//     status: null,
+//   },
+//   {
+//     student: {
+//       id: 3,
+//       firstName: 'Aluno 3',
+//       middleName: '',
+//       lastName: '',
+//     },
+//     status: null,
+//   }];
 
 
 const ClassOverview = ({ classItem, navigation }) => {
   const dispatch = useDispatch();
 
   const handleClick = async () => {
-    await dispatch(setCurrentClass(classItem));
-    await dispatch(setAttendanceAppointments(DATA));
+    await dispatch(setCurrentClassStart(classItem));
     navigation.push('Attendance', { currentClass: classItem });
   };
 
@@ -58,7 +57,7 @@ const ClassOverview = ({ classItem, navigation }) => {
           <ClassNameStyled>{classItem.name}</ClassNameStyled>
           <ClassDescriptionStyled>{classItem.description}</ClassDescriptionStyled>
         </ClassContainerStyled>
-        <Amount amount={classItem.studentsAmount} label="ALUNOS" />
+        <Amount amount={classItem.amountOfStudents} label="ALUNOS" />
       </ContainerStyled>
     </TouchableOpacity>
   );
