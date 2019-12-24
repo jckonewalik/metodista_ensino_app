@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { Platform } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Platform, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import CustomPickerButton from '../../components/custom-picker-button/custom-picker-button.component';
 import Title from '../../components/title/title.component';
 
+
 import {
   setAttendanceTeacher,
   setAttendanceLesson,
+  saveAttendanceStart,
 } from '../../redux/attendance/attendance.actions';
 import {
   RootContainerStyled,
@@ -17,22 +19,10 @@ import {
 import {
   selectAttendanceTeacher,
   selectAttendanceLesson,
+  selectAttendanceMessage,
 } from '../../redux/attendance/attendance.selectors';
+import { selectTeachersCurrentClass } from '../../redux/class/class.selectors';
 
-const teachers = [
-  {
-    id: 1,
-    name: 'João',
-  },
-  {
-    id: 2,
-    name: 'Amanda ',
-  },
-  {
-    id: 3,
-    name: 'Leandro',
-  },
-];
 const lessons = [
   {
     id: 1,
@@ -52,9 +42,10 @@ const AttendanceComplementPage = () => {
   const [showTeacher, setShowTeacher] = useState(false);
   const [showLesson, setShowLesson] = useState(false);
   const dispatch = useDispatch();
+  const teachers = useSelector(selectTeachersCurrentClass);
   const attendanceTeacher = useSelector(selectAttendanceTeacher);
   const attendanceLesson = useSelector(selectAttendanceLesson);
-
+  const attendanceMessage = useSelector(selectAttendanceMessage);
   const handleTeacherPress = (value) => {
     setShowTeacher(value);
     setShowLesson(false);
@@ -71,6 +62,23 @@ const AttendanceComplementPage = () => {
     setShowLesson(Platform.OS === 'ios');
     dispatch(setAttendanceLesson(itemValue));
   };
+  const handleSaveButton = () => {
+    dispatch(saveAttendanceStart());
+  };
+  const showMessage = () => {
+    if (attendanceMessage !== '') {
+      Alert.alert(
+        '',
+        `${attendanceMessage}`,
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: false },
+      );
+    }
+  };
+  useEffect(() => showMessage(), [attendanceMessage]);
+
   return (
     <RootContainerStyled>
       <BodyStyled>
@@ -80,7 +88,7 @@ const AttendanceComplementPage = () => {
           show={showTeacher}
           handlePress={handleTeacherPress}
           handleChange={handleTeacherChange}
-          options={teachers}
+          options={teachers.map((teacher) => ({ id: teacher.id, name: `${teacher.firstName}` }))}
         />
         <CustomPickerButton
           label="Lição"
@@ -92,7 +100,7 @@ const AttendanceComplementPage = () => {
         />
       </BodyStyled>
       <FooterStyled>
-        <SaveButtonStyled>SALVAR</SaveButtonStyled>
+        <SaveButtonStyled onPress={handleSaveButton}>SALVAR</SaveButtonStyled>
       </FooterStyled>
     </RootContainerStyled>
   );

@@ -2,7 +2,7 @@ import ClassActionsType from './class.types';
 
 export const setCurrentClassStart = (selectedClass) => ({
   type: ClassActionsType.SET_CURRENT_CLASS_START,
-  payload: selectedClass.id,
+  payload: selectedClass,
 });
 
 export const setCurrentClassSuccess = (studentsClass) => ({

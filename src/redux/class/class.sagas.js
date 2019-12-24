@@ -21,11 +21,11 @@ export function* fetchClasses() {
   }
 }
 
-function* fethStudentsClass(classId) {
+function* fethStudentsClass({ payload: { id } }) {
   try {
     const token = yield select(userTokenSelector);
     const response = yield api
-      .get(`/students-classes/${classId}`,
+      .get(`/students-classes/${id}`,
         { headers: { Authorization: `Bearer ${token}` } });
     const { studentsClass } = yield response.data;
     yield put(setCurrentClassSuccess(studentsClass));

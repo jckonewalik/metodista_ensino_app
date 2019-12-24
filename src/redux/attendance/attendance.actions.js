@@ -24,3 +24,17 @@ export const setAttendanceLesson = (lesson) => ({
   type: AttendanceTypes.SET_ATTENDANCE_LESSON,
   payload: lesson,
 });
+
+export const saveAttendanceStart = (attendance) => ({
+  type: AttendanceTypes.SAVE_ATTENDANCE_START,
+  payload: attendance,
+});
+
+export const saveAttendanceSuccess = () => ({
+  type: AttendanceTypes.SAVE_ATTENDANCE_SUCCESS,
+});
+
+export const saveAttendanceFailure = (error) => ({
+  type: AttendanceTypes.SAVE_ATTENDANCE_FAILURE,
+  payload: error.message,
+});

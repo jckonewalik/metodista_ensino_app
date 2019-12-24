@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   appointments: [],
   teacher: null,
   lesson: null,
+  message: '',
 };
 
 const attendanceReducer = (state = INITIAL_STATE, action) => {
@@ -32,6 +33,22 @@ const attendanceReducer = (state = INITIAL_STATE, action) => {
         ...state,
         lesson: action.payload,
       };
+    case AttendanceTypes.SAVE_ATTENDANCE_START:
+      return {
+        ...state,
+        message: '',
+      };
+    case AttendanceTypes.SAVE_ATTENDANCE_SUCCESS:
+      return {
+        ...state,
+        message: 'Chamada realizada com sucesso',
+      };
+    case AttendanceTypes.SAVE_ATTENDANCE_FAILURE:
+      return {
+        ...state,
+        message: action.payload,
+      };
+
     default:
       return state;
   }

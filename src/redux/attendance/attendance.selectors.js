@@ -1,10 +1,15 @@
 import { createSelector } from 'reselect';
 
-const selectAttendance = (state) => state.attendance;
+export const selectAttendance = (state) => state.attendance;
 
 export const selectAttendanceAppointments = createSelector(
   [selectAttendance],
   (attendance) => attendance.appointments,
+);
+
+export const selectAttendanceMessage = createSelector(
+  [selectAttendance],
+  (attendance) => attendance.message,
 );
 
 export const selectAttendanceDate = createSelector(
