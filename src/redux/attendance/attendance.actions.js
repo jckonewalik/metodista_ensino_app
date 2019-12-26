@@ -51,3 +51,7 @@ export const fetchLessonsListSuccess = (lessons) => ({
 export const fetchLessonsListFailure = () => ({
   type: AttendanceTypes.FETCH_LESSONS_LIST_FAILURE,
 });
+
+export const clearAttendanceMessage = () => ({
+  type: AttendanceTypes.CLEAR_ATTENDANCE_MESSAGE,
+})

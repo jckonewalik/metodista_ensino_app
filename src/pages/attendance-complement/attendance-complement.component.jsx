@@ -10,6 +10,7 @@ import {
   setAttendanceLesson,
   saveAttendanceStart,
   fetchLessonsListStart,
+  clearAttendanceMessage,
 } from '../../redux/attendance/attendance.actions';
 import {
   RootContainerStyled,
@@ -22,6 +23,7 @@ import {
   selectAttendanceLesson,
   selectAttendanceMessage,
   selectAttendanceLessons,
+  selectAttendanceError,
 } from '../../redux/attendance/attendance.selectors';
 import { selectTeachersCurrentClass } from '../../redux/class/class.selectors';
 
@@ -34,6 +36,7 @@ const AttendanceComplementPage = ({ navigation }) => {
   const attendanceTeacher = useSelector(selectAttendanceTeacher);
   const attendanceLesson = useSelector(selectAttendanceLesson);
   const attendanceMessage = useSelector(selectAttendanceMessage);
+  const attendanceError = useSelector(selectAttendanceError);
   const handleTeacherPress = (value) => {
     setShowTeacher(value);
     setShowLesson(false);
@@ -53,6 +56,12 @@ const AttendanceComplementPage = ({ navigation }) => {
   const handleSaveButton = () => {
     dispatch(saveAttendanceStart());
   };
+  const handleOkButton = () => {
+    if(!attendanceError) {
+      dispatch(clearAttendanceMessage());
+      navigation.navigate('MyClasses');
+    }
+  }
   const showMessage = () => {
     if (attendanceMessage !== '') {
       Alert.alert(
@@ -61,7 +70,7 @@ const AttendanceComplementPage = ({ navigation }) => {
         [
           {
             text: 'OK',
-            onPress: () => navigation.push('MyClasses'),
+            onPress: () => handleOkButton(),
           },
         ],
         { cancelable: false },

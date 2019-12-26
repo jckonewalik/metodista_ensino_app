@@ -9,6 +9,7 @@ const INITIAL_STATE = {
     lesson: null,
   },
   message: '',
+  hasError: false,
   lessons: [],
 };
 
@@ -62,12 +63,13 @@ const attendanceReducer = (state = INITIAL_STATE, action) => {
       };
     case AttendanceTypes.SAVE_ATTENDANCE_SUCCESS:
       return {
-        ...state,
+        ...INITIAL_STATE,        
         message: 'Chamada realizada com sucesso',
       };
     case AttendanceTypes.SAVE_ATTENDANCE_FAILURE:
       return {
         ...state,
+        hasError: true,
         message: action.payload,
       };
     case AttendanceTypes.FETCH_LESSONS_LIST_SUCCESS:
@@ -75,7 +77,11 @@ const attendanceReducer = (state = INITIAL_STATE, action) => {
         ...state,
         lessons: action.payload,
       };
-
+    case AttendanceTypes.CLEAR_ATTENDANCE_MESSAGE:
+      return {
+        ...state,
+        message: ''
+      }
     default:
       return state;
   }

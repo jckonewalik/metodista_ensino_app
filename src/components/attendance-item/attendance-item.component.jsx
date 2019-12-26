@@ -14,9 +14,13 @@ const AttendanceItem = ({ appointment }) => {
   const handleCheck = async (status) => {
     await dispatch(setAppointment({ ...appointment, status }));
   };
+  const name = `${appointment.student.firstName} ${appointment.student.lastName}`;
   return (
     <ContainerStyled>
-      <NamedStyled>{`${appointment.student.firstName} ${appointment.student.lastName}`}</NamedStyled>
+      <NamedStyled>{ name.length > 25
+        ? name.substring(0, 25).concat('...')
+        : name}
+      </NamedStyled>
       <ButtonContainerStyled>
         <CustomTouchableIcon
           isOpacity={appointment.status !== null && appointment.status}

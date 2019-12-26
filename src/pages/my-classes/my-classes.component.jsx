@@ -7,7 +7,7 @@ import RootContainer from '../../components/root-container/root-container.compon
 
 const MyClassesPage = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
+  useEffect(() => {    
     dispatch(getClassesStart());
   }, []);
   return (

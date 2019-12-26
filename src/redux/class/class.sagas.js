@@ -17,7 +17,8 @@ export function* fetchClasses() {
     const { studentsClasses } = yield response.data;
     yield put(getClassesSuccess(studentsClasses));
   } catch (error) {
-    yield put(getClassesFailure(error));
+    const responseError = yield error.response.data;
+    yield put(getClassesFailure(responseError));
   }
 }
 
@@ -30,7 +31,8 @@ function* fethStudentsClass({ payload: { id } }) {
     const { studentsClass } = yield response.data;
     yield put(setCurrentClassSuccess(studentsClass));
   } catch (error) {
-    yield put(setSetCurrentClassFailure(error));
+    const responseError = yield error.response.data;
+    yield put(setSetCurrentClassFailure(responseError));
   }
 }
 

@@ -11,7 +11,8 @@ export function* emailSignIn({ payload: { email, password } }) {
     const { user } = yield response.data;
     yield put(signInSuccess(user));
   } catch (error) {
-    yield put(signInFailure(error.message));
+    const responseError = yield error.response.data;
+    yield put(signInFailure(responseError));
   }
 }
 

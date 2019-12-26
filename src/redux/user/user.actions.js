@@ -12,7 +12,7 @@ export const signInSuccess = (user) => ({
 
 export const signInFailure = (error) => ({
   type: UserTypes.SIGN_IN_FAILURE,
-  payload: error,
+  payload: error.message,
 });
 
 export const checkUserSession = () => ({

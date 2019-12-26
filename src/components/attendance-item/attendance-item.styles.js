@@ -14,7 +14,7 @@ export const ContainerStyled = styled.View`
 export const NamedStyled = styled(CustomText)`
   color: #706F6F;
   font-weight: 700;
-  font-size: 18;
+  font-size: 14;
 `;
 
 

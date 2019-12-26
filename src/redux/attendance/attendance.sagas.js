@@ -18,19 +18,21 @@ function* saveAttendance() {
     const attendance = yield select(selectCurrentAttendance);
     const studentsClass = yield select(selectCurrentClass);
     const token = yield select(userTokenSelector);
+    const payload = {
+      date: attendance.date,
+      StudentsClassId: studentsClass.id,
+      TeacherId: attendance.teacher && attendance.teacher.id,
+      LessonId: attendance.lesson && attendance.lesson.id,
+      appointments: attendance.appointments.map(
+        (appointment) => ({ StudentId: appointment.student.id, status: appointment.status }),
+      ),
+    }  
     yield api.post('/attendances',
-      {
-        date: attendance.date,
-        StudentsClassId: studentsClass.id,
-        TeacherId: attendance.teacher.id,
-        LessonId: attendance.lesson && attendance.lesson.id,
-        appointments: attendance.appointments.map(
-          (appointment) => ({ StudentId: appointment.student.id, status: appointment.status }),
-        ),
-      }, { headers: { Authorization: `Bearer ${token}` } });
+      payload, { headers: { Authorization: `Bearer ${token}` } });
     yield put(saveAttendanceSuccess());
-  } catch (error) {
-    yield put(saveAttendanceFailure(error));
+  } catch (error) {    
+    const responseError = yield error.response.data;
+    yield put(saveAttendanceFailure(responseError));
   }
 }
 
