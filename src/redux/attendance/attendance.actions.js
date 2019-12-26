@@ -38,3 +38,16 @@ export const saveAttendanceFailure = (error) => ({
   type: AttendanceTypes.SAVE_ATTENDANCE_FAILURE,
   payload: error.message,
 });
+
+export const fetchLessonsListStart = () => ({
+  type: AttendanceTypes.FETCH_LESSONS_LIST_START,
+});
+
+export const fetchLessonsListSuccess = (lessons) => ({
+  type: AttendanceTypes.FETCH_LESSONS_LIST_SUCCESS,
+  payload: lessons,
+});
+
+export const fetchLessonsListFailure = () => ({
+  type: AttendanceTypes.FETCH_LESSONS_LIST_FAILURE,
+});

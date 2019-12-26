@@ -17,7 +17,7 @@ const MyClassesPage = () => {
   );
 };
 MyClassesPage.navigationOptions = () => ({
-  headerTitle: () => <Title title="Minhas Turmas" subtitle="João Carlos Konewalik de Souza" />,
+  headerTitle: () => <Title title="Minhas Turmas" subtitle="" />,
 });
 
 export default MyClassesPage;

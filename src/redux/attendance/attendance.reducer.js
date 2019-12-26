@@ -2,36 +2,58 @@ import AttendanceTypes from './attendance.types';
 import { setAppointment } from './attendance.utils';
 
 const INITIAL_STATE = {
-  date: new Date(),
-  appointments: [],
-  teacher: null,
-  lesson: null,
+  currentAttendance: {
+    date: new Date(),
+    appointments: [],
+    teacher: null,
+    lesson: null,
+  },
   message: '',
+  lessons: [],
 };
 
 const attendanceReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case AttendanceTypes.SET_ATTENDANCE_APPOINTMENTS:
-      return { ...state, appointments: action.payload };
+      return {
+        ...state,
+        currentAttendance: { ...state.currentAttendance, appointments: action.payload },
+      };
     case AttendanceTypes.SET_APPOINTMENT:
       return {
         ...state,
-        appointments: setAppointment(state.appointments, action.payload),
+        currentAttendance:
+        {
+          ...state.currentAttendance,
+          appointments: setAppointment(state.currentAttendance.appointments, action.payload),
+        },
       };
     case AttendanceTypes.SET_ATTENDANCE_DATE:
       return {
         ...state,
-        date: action.payload,
+        currentAttendance:
+        {
+          ...state.currentAttendance,
+          date: action.payload,
+        },
       };
     case AttendanceTypes.SET_ATTENDANCE_TEACHER:
       return {
         ...state,
-        teacher: action.payload,
+        currentAttendance:
+        {
+          ...state.currentAttendance,
+          teacher: action.payload,
+        },
       };
     case AttendanceTypes.SET_ATTENDANCE_LESSON:
       return {
         ...state,
-        lesson: action.payload,
+        currentAttendance:
+        {
+          ...state.currentAttendance,
+          lesson: action.payload,
+        },
       };
     case AttendanceTypes.SAVE_ATTENDANCE_START:
       return {
@@ -47,6 +69,11 @@ const attendanceReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         message: action.payload,
+      };
+    case AttendanceTypes.FETCH_LESSONS_LIST_SUCCESS:
+      return {
+        ...state,
+        lessons: action.payload,
       };
 
     default:

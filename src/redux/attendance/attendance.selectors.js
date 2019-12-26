@@ -2,9 +2,9 @@ import { createSelector } from 'reselect';
 
 export const selectAttendance = (state) => state.attendance;
 
-export const selectAttendanceAppointments = createSelector(
+export const selectCurrentAttendance = createSelector(
   [selectAttendance],
-  (attendance) => attendance.appointments,
+  (attendance) => attendance.currentAttendance,
 );
 
 export const selectAttendanceMessage = createSelector(
@@ -12,18 +12,28 @@ export const selectAttendanceMessage = createSelector(
   (attendance) => attendance.message,
 );
 
-export const selectAttendanceDate = createSelector(
+export const selectAttendanceLessons = createSelector(
   [selectAttendance],
+  (attendance) => attendance.lessons,
+);
+
+export const selectAttendanceAppointments = createSelector(
+  [selectCurrentAttendance],
+  (attendance) => attendance.appointments,
+);
+
+export const selectAttendanceDate = createSelector(
+  [selectCurrentAttendance],
   (attendance) => attendance.date,
 );
 
 export const selectAttendanceTeacher = createSelector(
-  [selectAttendance],
+  [selectCurrentAttendance],
   (attendance) => attendance.teacher,
 );
 
 export const selectAttendanceLesson = createSelector(
-  [selectAttendance],
+  [selectCurrentAttendance],
   (attendance) => attendance.lesson,
 );
 

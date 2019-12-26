@@ -9,6 +9,7 @@ import {
   setAttendanceTeacher,
   setAttendanceLesson,
   saveAttendanceStart,
+  fetchLessonsListStart,
 } from '../../redux/attendance/attendance.actions';
 import {
   RootContainerStyled,
@@ -20,29 +21,16 @@ import {
   selectAttendanceTeacher,
   selectAttendanceLesson,
   selectAttendanceMessage,
+  selectAttendanceLessons,
 } from '../../redux/attendance/attendance.selectors';
 import { selectTeachersCurrentClass } from '../../redux/class/class.selectors';
 
-const lessons = [
-  {
-    id: 1,
-    name: '01 - Pecado',
-  },
-  {
-    id: 2,
-    name: '02 - Arrependimento',
-  },
-  {
-    id: 3,
-    name: '03 - Salvação',
-  },
-];
-
-const AttendanceComplementPage = () => {
+const AttendanceComplementPage = ({ navigation }) => {
   const [showTeacher, setShowTeacher] = useState(false);
   const [showLesson, setShowLesson] = useState(false);
   const dispatch = useDispatch();
   const teachers = useSelector(selectTeachersCurrentClass);
+  const lessons = useSelector(selectAttendanceLessons);
   const attendanceTeacher = useSelector(selectAttendanceTeacher);
   const attendanceLesson = useSelector(selectAttendanceLesson);
   const attendanceMessage = useSelector(selectAttendanceMessage);
@@ -71,13 +59,17 @@ const AttendanceComplementPage = () => {
         '',
         `${attendanceMessage}`,
         [
-          { text: 'OK' },
+          {
+            text: 'OK',
+            onPress: () => navigation.push('MyClasses'),
+          },
         ],
         { cancelable: false },
       );
     }
   };
   useEffect(() => showMessage(), [attendanceMessage]);
+  useEffect(() => { dispatch(fetchLessonsListStart()); }, []);
 
   return (
     <RootContainerStyled>
@@ -96,7 +88,7 @@ const AttendanceComplementPage = () => {
           show={showLesson}
           handlePress={handleLessonPress}
           handleChange={handleLessonChange}
-          options={lessons}
+          options={lessons.map((lesson) => ({ id: lesson.id, name: `${lesson.number} - ${lesson.name}` }))}
         />
       </BodyStyled>
       <FooterStyled>
