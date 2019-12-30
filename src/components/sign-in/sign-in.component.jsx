@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../../services/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { TouchableOpacity, Alert, YellowBox } from 'react-native';
 import { emailSignInStart } from '../../redux/user/user.actions';
@@ -46,6 +47,23 @@ const SignIn = () => {
   };
 
   const handlePasswordForgot = async () => {
+    let reponseMessage = '';
+    try { 
+      const response = await api.put('/users/reset-password', { email: userCredentials.email });
+      const { message } = await response.data;
+      reponseMessage = message;
+    } catch (error) {
+      const responseError = await error.response.data;
+      reponseMessage = responseError.message;
+    }
+    Alert.alert(
+      '',
+      `${reponseMessage}`,
+      [
+        { text: 'OK' },
+      ],
+      { cancelable: false },
+    );
   };
 
   const handleEmailChange = (text) => {

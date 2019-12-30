@@ -18,6 +18,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: { hasError: true, message: action.payload },
       };
+    case UserTypes.CHECK_USER_SESSION_FAILURE:
+      return {
+        ...state,
+        currentUser: null
+      }
     default:
       return state;
   }

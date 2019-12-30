@@ -15,6 +15,13 @@ export const signInFailure = (error) => ({
   payload: error.message,
 });
 
-export const checkUserSession = () => ({
-  type: UserTypes.CHECK_USER_SESSION,
+export const checkUserSessionStart = () => ({
+  type: UserTypes.CHECK_USER_SESSION_START,
+});
+
+export const checkUserSessionSuccess = () => ({
+  type: UserTypes.CHECK_USER_SESSION_SUCCESS,
+});
+export const checkUserSessionFailure = () => ({
+  type: UserTypes.CHECK_USER_SESSION_FAILURE,
 });
